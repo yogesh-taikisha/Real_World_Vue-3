@@ -14,12 +14,15 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+      // Ensure the webpackChunkName comment is compatible if you're using it,
+      // but Vite handles chunking automatically.
+      import("../views/About.vue") 
   }
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  // Use import.meta.env.BASE_URL for environment variables in Vite
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes
 });
 
